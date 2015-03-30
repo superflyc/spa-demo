@@ -13,7 +13,7 @@ var main = (function () {
         menu.init()
             .then(function (){
                 content.init();
-                router.init();
+                router.init(menu,content);
                 //take us home if we're not there already
                 if (!window.location.hash) router.handleRequest();
             });

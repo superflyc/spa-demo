@@ -1,6 +1,9 @@
 //router logic
 var router = (function() {
 
+    //set up objs for the menu and content functionality
+    var menuObj, contentObj;
+
     var handleRequest = function (section, subSection) {
 
         //parse this into an array and ship it off to the menu
@@ -8,8 +11,8 @@ var router = (function() {
         if (section) requestArray.push(section);
         if (subSection) requestArray.push(subSection);
 
-        menu.setActiveItems(requestArray);
-        content.loadContent(requestArray);
+        router.menuObj.setActiveItems(requestArray);
+        router.contentObj.loadContent(requestArray);
 
     };
 
@@ -31,7 +34,12 @@ var router = (function() {
         }
     });
 
-    var init = function() {
+    //dependency injection for the menu and content objects
+    var init = function(menuObj, contentObj) {
+
+        router.menuObj = menuObj;
+        router.contentObj = contentObj;
+
         router.init();
     };
 
