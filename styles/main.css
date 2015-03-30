@@ -1,0 +1,13 @@
+/* nav styles */
+
+.large-logo {
+    width: 300px;
+    min-width: 300px;
+    position: relative;
+    bottom: 9px;
+}
+
+.small-logo {
+    width: 168px;
+    min-width: 168px;
+}
