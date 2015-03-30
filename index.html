@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <input type="text" role="search" class="form-control" aria-label="search" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default" value="Submit">Submit</button>
             </form>
 
         </div>
@@ -95,6 +95,67 @@
 
         <!-- ko if: contentText -->
         <p data-bind="text: contentText"></p>
+        <!-- /ko -->
+
+        <!-- ko if: contentQuestions -->
+        <form>
+            <!-- ko foreach: contentQuestions -->
+            <section role="group">
+                <h2 data-bind="text: sectionTitle"></h2>
+
+                <p data-bind="text: sectionText"></p>
+                <!-- ko foreach: questions -->
+                <div class="question">
+                    <fieldset>
+                        <legend data-bind="text: questionText"></legend>
+
+                        <!-- ko if: questionType === 'radio' -->
+                        <label class="radio-inline">
+                            <input type="radio" value="0" data-bind="checked: questionValue"/> 0 (not present)
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="1" data-bind="checked: questionValue"/> 1
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="2" data-bind="checked: questionValue"/> 2
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="3" data-bind="checked: questionValue"/> 3
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="4" data-bind="checked: questionValue"/> 4
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="5" data-bind="checked: questionValue"/> 5
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="6" data-bind="checked: questionValue"/> 6
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="7" data-bind="checked: questionValue"/> 7
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="8" data-bind="checked: questionValue"/> 8
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="9" data-bind="checked: questionValue"/> 9
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="10" data-bind="checked: questionValue"/> 10 (as bad as you can imagine)
+                        </label>
+                        <br/>
+                        <br/>
+
+
+                        <!-- /ko -->
+
+                    </fieldset>
+                </div>
+                <!-- /ko -->
+            </section>
+            <!-- /ko -->
+            <br/><button type="submit" class="btn btn-default" value="Submit" data-bind="click: submitForm">Submit</button>
+        </form>
         <!-- /ko -->
 
     </main>

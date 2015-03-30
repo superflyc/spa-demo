@@ -1,6 +1,8 @@
 //router logic
 var router = (function() {
 
+    "use strict";
+
     //set up objs for the menu and content functionality
     var menuObj, contentObj;
 

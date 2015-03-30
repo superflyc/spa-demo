@@ -1273,7 +1273,7 @@ h1,
 }
 h2,
 .h2 {
-  font-size: 30px;
+  font-size: 19px;
 }
 h3,
 .h3 {
@@ -2494,7 +2494,7 @@ legend {
   width: 100%;
   padding: 0;
   margin-bottom: 20px;
-  font-size: 21px;
+  font-size: 15.4px;
   line-height: inherit;
   color: #333;
   border: 0;
