@@ -1,15 +1,18 @@
 [
 
+
+    {
+        "section":"",
+        "title":"Welcome to MD Anderson",
+        "contentText":"Here is some welcome text for the home page. For the interactive questionnaire, go to Cancer->Symptom Inventory"
+    },
+
     {
         "section":"ABOUT",
         "title":"About MD Anderson",
         "contentText":"Here is text about MD Anderson. For the interactive questionnaire, go to Cancer->Symptom Inventory"
     },
-    {
-        "section":"CANCER",
-        "title":"MD Anderson's Commitment to Cancer Research",
-        "contentText":"Here is text about cancer. For the interactive questionnaire, go to Cancer->Symptom Inventory"
-    },
+
     {
         "section": "CANCER",
         "subSection":"Cancer Types",

@@ -8,7 +8,7 @@ var menu = (function () {
     //viewModel is a set of knockout observables that are sync'd to the UI
     var model = {}, viewModel;
 
-
+//in prod, the db and server layers would handle the lifting we're doing here
     var getDocs = function () {
 
         //promises are a way of handling async code without callbacks
@@ -16,7 +16,7 @@ var menu = (function () {
         return Q.Promise(function (resolve, reject, notify) {
 
             $.ajax({
-                dataType:'json',
+                dataType: 'json',
                 url: 'data/docs.js',
                 success: function (data, status, jqXHR) {
                     resolve(data);
@@ -37,6 +37,9 @@ var menu = (function () {
 
         //break out all docs into a section/subsection tree
         //this assumes that docs on the site only have two levels
+        //bonus points: there is no block level scope in javascript, so these var i = 0 in the
+        //for-loops are being hoisted to the top of the closure, but the behavior is as expected and
+        //declaring them in the relevant for-loop is easier to read
         for (var i = 0; i < data.length; i++) {
             if (data[i].section && !docs[data[i].section]) {
                 docs[data[i].section] = [];
@@ -58,13 +61,15 @@ var menu = (function () {
             var menuItem = {};
             menuItem.title = currentSection;
             menuItem.url = currentSection.toLowerCase();
+            menuItem.active = false;
             menuItem.subSections = [];
 
             for (var k = 0; k < docs[currentSection].length; k++) {
 
                 var subMenuItem = {};
                 subMenuItem.title = docs[currentSection][k];
-                subMenuItem.url = menuItem.url + "/" + docs[currentSection][k].toLowerCase().replace(' ','');
+                subMenuItem.url = menuItem.url + "/" + docs[currentSection][k].toLowerCase().replace(' ', '');
+                subMenuItem.active = false;
 
                 menuItem.subSections.push(subMenuItem);
             }
@@ -79,22 +84,66 @@ var menu = (function () {
 
     };
 
+    var setActiveItems = function (route) {
+        //route is already broken down into an array: [Section,subSection]
+
+        //catch an empty values
+        var selectedSection = route.length > 0 ? route[0] : '';
+        var selectedSubSection = route.length > 1 ? route[1] : '';
+
+        for (var i = 0; i < viewModel.docs().length; i++) {
+            var currentSection = viewModel.docs()[i];
+            if (currentSection.url && currentSection.url() === selectedSection) {
+                currentSection.active(true);
+                if (selectedSubSection) {
+                    for (var j = 0; j < currentSection.subSections().length; j++) {
+                        //the url has the whole path, so split and pop it to get the value we want
+                        if (currentSection.subSections()[j].url && currentSection.subSections()[j].url().split('/').pop() === selectedSubSection) {
+                            currentSection.subSections()[j].active(true);
+                        } else {
+                            currentSection.subSections()[j].active(false);
+                        }
+                    }
+                }
+            } else {
+                currentSection.active(false);
+                for (var j = 0; j < currentSection.subSections().length; j++) {
+
+                    currentSection.subSections()[j].active(false);
+                }
+            }
+        }
+
+
+    };
+
+
     var init = function () {
 
-        getDocs()
-            .then(function (results) {
+        return Q.Promise(function(resolve,reject,notify) {
 
+            getDocs()
+                .then(function (results) {
                     parseDocs(results);
+                    //and then
+                    ko.applyBindings(viewModel, $("#navigation")[0]);
+                    resolve();
+                })
+                .fail(function (err) {
+                    alert(err);
+                    reject();
+                });
 
-            })
-            .fail(function (err) {
-                alert(err);
-            });
+        });
+
+
 
     };
 
     return {
-        init: init
+        init: init,
+        setActiveItems: setActiveItems
     };
 
-})();
+})
+();
