@@ -53,6 +53,7 @@ var content = (function () {
             if (!selectedDoc.length) {
                 throw new Error("Cannot find requested document!");
             } else {
+                viewModel.contentQuestions = ko.observable(); //there's a bug in the ko.viewmodel plugin that will crash if an empty observableArray is passed to updateViewModel
                 ko.viewmodel.updateFromModel(viewModel, initModel(selectedDoc[0]));
             }
 
