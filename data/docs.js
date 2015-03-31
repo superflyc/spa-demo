@@ -36,7 +36,7 @@
         "docType":"survey",
         "contentQuestions":[
             {
-                "sectionTitle": "Part I. How severe are your symptoms?",
+                "sectionTitle": "Section 1. How severe are your symptoms?",
                 "sectionText": "People with cancer frequently have symptoms that are caused by their disease or their treatment. Patients with heart failure may have similar symptoms. We ask you to rate how severe the following symptoms have been in the last 24 hours. Please fill in the circle below from 0 (symptom has not been present) to 10 (the symptom was as bad as you can imagine it could be) for each item.",
                 "questions": [
                     {"questionType": "radio",
@@ -105,7 +105,7 @@
                 ]
             },
             {
-                "sectionTitle": "Part II. How have your symptoms interfered with your life?",
+                "sectionTitle": "Section 2. How have your symptoms interfered with your life?",
                 "sectionText": "Symptoms frequently interfere with how we feel and function. How much have your symptoms interfered with the following items in the last 24 hours:",
                 "questions":[
                     {"questionType": "radio",

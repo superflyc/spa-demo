@@ -54,6 +54,9 @@ var content = (function () {
                 throw new Error("Cannot find requested document!");
             } else {
                 viewModel.contentQuestions = ko.observable(); //there's a bug in the ko.viewmodel plugin that will crash if an empty observableArray is passed to updateViewModel
+
+                if(selectedDoc[0].docType === "survey") decorateModel(selectedDoc[0]);
+
                 ko.viewmodel.updateFromModel(viewModel, initModel(selectedDoc[0]));
             }
 
@@ -64,14 +67,17 @@ var content = (function () {
 
     };
 
-    //initialize the model with defaults - don't assume we're dealing with an RDBMS that has identically structured records
+    //initialize the model with defaults
+    //different models for different docTypes is preferrable in the long run
     var initModel = function(model) {
 
         var modelDefaults = {
             title: "",
             contentText: "",
             contentQuestions: "",
-            docType: ""
+            docType: "",
+            selectedSection: 0,
+            totalQuestions:0
         };
 
         $.extend(modelDefaults,model);
@@ -79,7 +85,26 @@ var content = (function () {
 
     };
 
-    //
+    //decorator function for surveys
+    function decorateModel(model) {
+        model.totalQuestions = 0;
+
+        for(var i = 0; i < model.contentQuestions.length; i ++) {
+            model.contentQuestions[i].startQuestion = model.totalQuestions + 1;
+
+            for(var j = 0; j < model.contentQuestions[i].questions.length; j++) {
+                model.totalQuestions++;
+            }
+            model.contentQuestions[i].endQuestion = model.totalQuestions;
+
+        }
+
+    };
+
+    //handle a tab click
+    var clickTab = function(index) {
+        viewModel.selectedSection(index);
+    }
 
     //handle a form submit
     var submitForm = function() {
@@ -106,7 +131,8 @@ var content = (function () {
     return {
         init: init,
         loadContent: loadContent,
-        submitForm: submitForm
+        submitForm: submitForm,
+        clickTab: clickTab
     };
 
 })();

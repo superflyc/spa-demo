@@ -98,9 +98,27 @@
         <!-- /ko -->
 
         <!-- ko if: docType() === 'survey'-->
+
+        <p>Please fill out each section of the below questionnaire. Not all fields are required. At the end of the last section,
+         you will be able to submit the form.</p>
+
         <form>
+
+
+
+            <ul class="nav nav-tabs" role = "navigation">
+                <!-- ko foreach: contentQuestions -->
+                <li role="presentation" data-bind="css:{active : $root.selectedSection() === $index()}">
+                    <a href="" data-bind="text: 'Section ' + (Number($index())+1), click: content.clickTab.bind($data, $index())"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+
             <!-- ko foreach: contentQuestions -->
-            <section role="group">
+
+            <section role="group" data-bind="visible: $index() === $root.selectedSection()">
+                <p>Questions <!-- ko text: startQuestion --><!-- /ko --> - <!-- ko text: endQuestion --><!-- /ko --> of <!-- ko text: $root.totalQuestions() --><!-- /ko --></p>
+
                 <h2 data-bind="text: sectionTitle"></h2>
 
                 <p data-bind="text: sectionText"></p>
@@ -152,13 +170,32 @@
                     </fieldset>
                 </div>
                 <!-- /ko -->
+                <br/><br/>
+                <button type = "button" role = "navigation" class = "btn btn-default pull-left" data-bind="visible: $root.selectedSection() > 0, click: content.clickTab.bind($data, $root.selectedSection() -1)" value = "Previous">&lt; Previous</button>
+
+                <button type = "button" role = "navigation" class = "btn btn-default pull-left" data-bind="visible: $root.selectedSection() < $parent.contentQuestions().length -1, click: content.clickTab.bind($data, $root.selectedSection()+1)"  value = "Next">Next &gt;</button>
+
+
+                <button type="submit" class="btn btn-success pull-right" value="Submit"
+                        data-bind="click: content.submitForm, visible: $index() === $parent.contentQuestions().length - 1">Submit</button>
             </section>
             <!-- /ko -->
-            <br/><button type="submit" class="btn btn-default" value="Submit" data-bind="click: content.submitForm">Submit</button>
+
         </form>
         <!-- /ko -->
 
     </main>
+
+<br/><br/>
+    <footer>
+        <hr/>
+        <p><strong>© 2015 The University of Texas MD Anderson Cancer Center</strong><br>
+            1515 Holcombe Blvd, Houston, TX 77030<br>
+            1-800-392-1611 (USA) / 1-713-792-6161<br>
+
+            <span class="small">(B2)</span>
+        </p>
+    </footer>
 </div>
 
 <!-- CMW see note about about min and concat'ing these with grunt -->
