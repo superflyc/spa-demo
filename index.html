@@ -117,7 +117,7 @@
             <!-- ko foreach: contentQuestions -->
 
             <section role="group" data-bind="visible: $index() === $root.selectedSection()">
-                <p>Questions <!-- ko text: startQuestion --><!-- /ko --> - <!-- ko text: endQuestion --><!-- /ko --> of <!-- ko text: $root.totalQuestions() --><!-- /ko --></p>
+                <p class = "pull-right">Questions <!-- ko text: startQuestion --><!-- /ko --> - <!-- ko text: endQuestion --><!-- /ko --> of <!-- ko text: $root.totalQuestions() --><!-- /ko --></p>
 
                 <h2 data-bind="text: sectionTitle"></h2>
 
