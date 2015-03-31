@@ -70,13 +70,15 @@ var content = (function () {
             title: "",
             contentText: "",
             contentQuestions: "",
-            action: ""
+            docType: ""
         };
 
         $.extend(modelDefaults,model);
         return modelDefaults;
 
-    }
+    };
+
+    //
 
     //handle a form submit
     var submitForm = function() {
@@ -86,23 +88,24 @@ var content = (function () {
         console.log(model); //check here to verify doc submission
 
         $.ajax({
-            url:viewModel.action(),
+            url:"",
             method:"POST",
             data: model
         }).done(function() {
             alert("data posted. check console or network traffic for confirmation");
         })
-    }
+    };
 
     var init = function () {
+
        viewModel = ko.viewmodel.fromModel(initModel(model));
-        viewModel.submitForm = submitForm;
         ko.applyBindings(viewModel, $("#mainContent")[0]);
     };
 
     return {
         init: init,
-        loadContent: loadContent
+        loadContent: loadContent,
+        submitForm: submitForm
     };
 
 })();
