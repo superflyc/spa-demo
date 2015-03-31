@@ -86,7 +86,7 @@ var content = (function () {
     };
 
     //decorator function for surveys
-    function decorateModel(model) {
+    var decorateModel = function(model) {
         model.totalQuestions = 0;
 
         for(var i = 0; i < model.contentQuestions.length; i ++) {
@@ -104,7 +104,7 @@ var content = (function () {
     //handle a tab click
     var clickTab = function(index) {
         viewModel.selectedSection(index);
-    }
+    };
 
     //handle a form submit
     var submitForm = function() {
@@ -119,7 +119,7 @@ var content = (function () {
             data: model
         }).done(function() {
             alert("data posted. check console or network traffic for confirmation");
-        })
+        });
     };
 
     var init = function () {
