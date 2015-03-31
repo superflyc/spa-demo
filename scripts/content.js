@@ -6,17 +6,8 @@ var content = (function () {
     //model and viewModel for knockout
     //model is a POJO that holds JSON data
     //viewModel is a set of knockout observables that are sync'd to the UI
-    //let's init model with some values expected by the UI
-    var model = {
 
-        title: "",
-        contentText: "",
-        contentQuestions: "",
-        action: ""
-
-    };
-
-    var viewModel;
+    var model={}, viewModel;
 
     //get content from the db
     //filtering and heavy lifting would be done on db/server
@@ -62,7 +53,7 @@ var content = (function () {
             if (!selectedDoc.length) {
                 throw new Error("Cannot find requested document!");
             } else {
-                ko.viewmodel.updateFromModel(viewModel, selectedDoc[0]);
+                ko.viewmodel.updateFromModel(viewModel, initModel(selectedDoc[0]));
             }
 
         })
@@ -71,6 +62,21 @@ var content = (function () {
             });
 
     };
+
+    //initialize the model with defaults - don't assume we're dealing with an RDBMS that has identically structured records
+    var initModel = function(model) {
+
+        var modelDefaults = {
+            title: "",
+            contentText: "",
+            contentQuestions: "",
+            action: ""
+        };
+
+        $.extend(modelDefaults,model);
+        return modelDefaults;
+
+    }
 
     //handle a form submit
     var submitForm = function() {
@@ -89,7 +95,7 @@ var content = (function () {
     }
 
     var init = function () {
-        viewModel = ko.viewmodel.fromModel(model);
+       viewModel = ko.viewmodel.fromModel(initModel(model));
         viewModel.submitForm = submitForm;
         ko.applyBindings(viewModel, $("#mainContent")[0]);
     };

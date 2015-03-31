@@ -97,7 +97,7 @@
         <p data-bind="text: contentText"></p>
         <!-- /ko -->
 
-        <!-- ko if: contentQuestions -->
+        <!-- ko if: contentQuestions && contentQuestions().length-->
         <form>
             <!-- ko foreach: contentQuestions -->
             <section role="group">
