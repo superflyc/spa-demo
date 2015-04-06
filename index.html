@@ -24,169 +24,207 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default" role="navigation" id="navigation">
-    <div class="container-fluid">
+<div class="container">
 
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img alt="MD Anderson Banner" src="images/myMDAnderson_RGB.png"
-                     class="large-logo visible-lg-inline visible-md-inline"/>
-                <img alt="MD Anderson Banner" src="images/logo_main_small.png"
-                     class="small-logo visible-sm-inline visible-xs-inline"/>
-            </a>
-        </div>
+<a href = "#mainContent" class = "sr-only sr-only-focusable">skip to content</a>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!-- ko foreach: docs -->
-                <li data-bind="css: {active: active(), dropdown: subSections().length}">
-                    <!-- ko if: !subSections().length -->
-                    <a data-bind="attr: {href: '#/render/'+url()}">
-                        <!-- ko text: title --><!-- /ko -->
-                        <!-- ko if: active --><span class="sr-only">(current)</span><!-- /ko -->
-                    </a>
+    <nav class="navbar navbar-default" role="navigation" id="navigation">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img alt="MD Anderson Banner" src="images/myMDAnderson_RGB.png"
+                         class="large-logo visible-lg-inline visible-md-inline"/>
+                    <img alt="MD Anderson Banner" src="images/logo_main_small.png"
+                         class="small-logo visible-sm-inline visible-xs-inline"/>
+                </a>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!-- ko foreach: docs -->
+                    <li data-bind="css: {active: active(), dropdown: subSections().length}">
+                        <!-- ko if: !subSections().length -->
+                        <a data-bind="attr: {href: '#/render/'+url()}">
+                            <!-- ko text: title --><!-- /ko -->
+                            <!-- ko if: active --><span class="sr-only">(current)</span><!-- /ko -->
+                        </a>
+                        <!-- /ko -->
+                        <!-- ko if: subSections().length -->
+                        <a data-bind="attr: {href: '#/render/'+url()}" class="dropdown-toggle" data-toggle="dropdown"
+                           role="button"
+                           aria-expanded="false">
+                            <!-- ko text: title --><!-- /ko -->
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <!-- ko foreach: subSections -->
+                            <li data-bind="css: {active: active()}">
+                                <a data-bind="attr: {href: '#/render/'+url()}">
+                                    <!-- ko text: title --><!-- /ko -->
+                                </a>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                        <!-- /ko -->
+                    </li>
                     <!-- /ko -->
-                    <!-- ko if: subSections().length -->
-                    <a data-bind="attr: {href: '#/render/'+url()}" class="dropdown-toggle" data-toggle="dropdown"
-                       role="button"
-                       aria-expanded="false">
-                        <!-- ko text: title --><!-- /ko -->
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <!-- ko foreach: subSections -->
-                        <li data-bind="css: {active: active()}">
-                            <a data-bind="attr: {href: '#/render/'+url()}">
-                                <!-- ko text: title --><!-- /ko -->
-                            </a>
+
+                </ul>
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" role="search" class="form-control" aria-label="search" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default" value="Submit">Submit</button>
+                </form>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+
+    <main id="mainContent" role="main">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title" role="banner" data-bind="text: title"></h1>
+            </div>
+            <div class="panel-body">
+
+                <!-- ko if: docType() === 'article' -->
+                <p data-bind="text: contentText"></p>
+                <!-- /ko -->
+
+                <!-- ko if: docType() === 'survey'-->
+
+                <p>Please fill out each section of the below questionnaire. Not all fields are required. At the end of
+                    the last section,
+                    you will be able to submit the form.</p>
+
+                <form>
+
+
+                    <ul class="nav nav-tabs" role="navigation">
+                        <!-- ko foreach: contentQuestions -->
+                        <li role="presentation" data-bind="css:{active : $root.selectedSection() === $index()}">
+                            <a href=""
+                               data-bind="text: 'Section ' + (Number($index())+1), click: content.clickTab.bind($data, $index())"></a>
                         </li>
                         <!-- /ko -->
                     </ul>
+
+                    <!-- ko foreach: contentQuestions -->
+
+                    <section role="group" data-bind="visible: $index() === $root.selectedSection()">
+                        <p class="pull-right">Questions <!-- ko text: startQuestion --><!-- /ko --> -
+                            <!-- ko text: endQuestion --><!-- /ko --> of <!-- ko text: $root.totalQuestions() -->
+                            <!-- /ko --></p>
+
+                        <h2 data-bind="text: sectionTitle"></h2>
+
+                        <p data-bind="text: sectionText"></p>
+                        <!-- ko foreach: questions -->
+                        <div class="question">
+                            <fieldset>
+                                <legend data-bind="text: questionText"></legend>
+
+                                <!-- ko if: questionType === 'radio' -->
+                                <label class="radio-inline">
+                                    <input type="radio" value="0"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 0 (not
+                                    present)
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="1"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 1
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="2"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 2
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="3"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 3
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="4"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 4
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="5"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 5
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="6"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 6
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="7"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 7
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="8"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 8
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="9"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 9
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="10"
+                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 10 (as
+                                    bad as you can imagine)
+                                </label>
+                                <br/>
+                                <br/>
+
+
+                                <!-- /ko -->
+
+                            </fieldset>
+                        </div>
+                        <!-- /ko -->
+                        <br/><br/>
+                        <button type="button" role="navigation" class="btn btn-default pull-left"
+                                data-bind="visible: $root.selectedSection() > 0, click: content.clickTab.bind($data, $root.selectedSection() -1)"
+                                value="Previous">&lt; Previous
+                        </button>
+
+                        <button type="button" role="navigation" class="btn btn-default pull-left"
+                                data-bind="visible: $root.selectedSection() < $parent.contentQuestions().length -1, click: content.clickTab.bind($data, $root.selectedSection()+1)"
+                                value="Next">Next &gt;</button>
+
+
+                        <button type="submit" class="btn btn-success pull-right" value="Submit"
+                                data-bind="click: content.submitForm, visible: $index() === $parent.contentQuestions().length - 1">
+                            Submit
+                        </button>
+                    </section>
                     <!-- /ko -->
-                </li>
+
+                </form>
                 <!-- /ko -->
 
-            </ul>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" role="search" class="form-control" aria-label="search" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default" value="Submit">Submit</button>
-            </form>
+            </div>
+            <!-- ./panel-body -->
 
         </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-<div class="container">
-    <main id="mainContent" role="main">
-
-        <h1 role="banner" data-bind="text: title"></h1>
-
-        <!-- ko if: docType() === 'article' -->
-        <p data-bind="text: contentText"></p>
-        <!-- /ko -->
-
-        <!-- ko if: docType() === 'survey'-->
-
-        <p>Please fill out each section of the below questionnaire. Not all fields are required. At the end of the last section,
-         you will be able to submit the form.</p>
-
-        <form>
-
-
-
-            <ul class="nav nav-tabs" role = "navigation">
-                <!-- ko foreach: contentQuestions -->
-                <li role="presentation" data-bind="css:{active : $root.selectedSection() === $index()}">
-                    <a href="" data-bind="text: 'Section ' + (Number($index())+1), click: content.clickTab.bind($data, $index())"></a>
-                </li>
-                <!-- /ko -->
-            </ul>
-
-            <!-- ko foreach: contentQuestions -->
-
-            <section role="group" data-bind="visible: $index() === $root.selectedSection()">
-                <p class = "pull-right">Questions <!-- ko text: startQuestion --><!-- /ko --> - <!-- ko text: endQuestion --><!-- /ko --> of <!-- ko text: $root.totalQuestions() --><!-- /ko --></p>
-
-                <h2 data-bind="text: sectionTitle"></h2>
-
-                <p data-bind="text: sectionText"></p>
-                <!-- ko foreach: questions -->
-                <div class="question">
-                    <fieldset>
-                        <legend data-bind="text: questionText"></legend>
-
-                        <!-- ko if: questionType === 'radio' -->
-                        <label class="radio-inline">
-                            <input type="radio" value="0" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 0 (not present)
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="1" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 1
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="2" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 2
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="3" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 3
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="4" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 4
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="5" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 5
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="6" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 6
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="7" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 7
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="8" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 8
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="9" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 9
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="10" data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 10 (as bad as you can imagine)
-                        </label>
-                        <br/>
-                        <br/>
-
-
-                        <!-- /ko -->
-
-                    </fieldset>
-                </div>
-                <!-- /ko -->
-                <br/><br/>
-                <button type = "button" role = "navigation" class = "btn btn-default pull-left" data-bind="visible: $root.selectedSection() > 0, click: content.clickTab.bind($data, $root.selectedSection() -1)" value = "Previous">&lt; Previous</button>
-
-                <button type = "button" role = "navigation" class = "btn btn-default pull-left" data-bind="visible: $root.selectedSection() < $parent.contentQuestions().length -1, click: content.clickTab.bind($data, $root.selectedSection()+1)"  value = "Next">Next &gt;</button>
-
-
-                <button type="submit" class="btn btn-success pull-right" value="Submit"
-                        data-bind="click: content.submitForm, visible: $index() === $parent.contentQuestions().length - 1">Submit</button>
-            </section>
-            <!-- /ko -->
-
-        </form>
-        <!-- /ko -->
+        <!-- /.panel -->
 
     </main>
 
-<br/><br/>
+    <br/><br/>
     <footer>
         <hr/>
         <p><strong>© 2015 The University of Texas MD Anderson Cancer Center</strong><br>
@@ -196,6 +234,8 @@
             <span class="small">(B2)</span>
         </p>
     </footer>
+
+
 </div>
 
 <!-- CMW see note about about min and concat'ing these with grunt -->
