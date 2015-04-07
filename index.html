@@ -9,6 +9,7 @@
 
     <!-- very lightly modified Bootstrap theme compiled from source with LESS/grunt -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,12 +22,13 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 <body>
 
 <div class="container">
 
-<a href = "#mainContent" class = "sr-only sr-only-focusable">skip to content</a>
+    <a href="#mainContent" class="sr-only sr-only-focusable">skip to content</a>
 
     <nav class="navbar navbar-default" role="navigation" id="navigation">
         <div class="container-fluid">
@@ -136,63 +138,28 @@
                         <p data-bind="text: sectionText"></p>
                         <!-- ko foreach: questions -->
                         <div class="question">
-                            <fieldset>
-                                <legend data-bind="text: questionText"></legend>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
 
-                                <!-- ko if: questionType === 'radio' -->
-                                <label class="radio-inline">
-                                    <input type="radio" value="0"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 0 (not
-                                    present)
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="1"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="2"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="3"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 3
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="4"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 4
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="5"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 5
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="6"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 6
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="7"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 7
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="8"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 8
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="9"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 9
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="10"
-                                           data-bind="checked: questionValue, attr:{name:'survey'+$index()}"/> 10 (as
-                                    bad as you can imagine)
-                                </label>
-                                <br/>
-                                <br/>
+                                            <label data-bind="text: questionText, attr: {for: 'question'+$index()}"></label>
+                                        </div>
+                                        <!-- ko if: questionType === 'radio' -->
+                                        <div class="col-md-6">
+                                            <input data-bind="slider: questionValue, attr: {id:'question'+$index()}, value: questionValue"
+                                                   role="slider" class = "questionSlider"/>
+                                        </div>
 
 
-                                <!-- /ko -->
+                                        <!-- /ko -->
 
-                            </fieldset>
+                                    </div>
+                                    <!-- /.row -->
+
+                                </div>
+                            </div>
+
                         </div>
                         <!-- /ko -->
                         <br/><br/>
@@ -217,7 +184,7 @@
                 <!-- /ko -->
 
             </div>
-            <!-- ./panel-body -->
+            <!-- /.panel-body -->
 
         </div>
         <!-- /.panel -->
@@ -245,9 +212,11 @@
 <script src="bower_components/knockout/dist/knockout.js"></script>
 <script src="lib/viewmodel-plugin/knockout.viewmodel.js"></script>
 <script src="bower_components/q/q.js"></script>
+<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
 <script src="scripts/menu.js"></script>
 <script src="scripts/router.js"></script>
 <script src="scripts/content.js"></script>
+<script src="scripts/ui.js"></script>
 <script src="scripts/main.js"></script>
 
 </body>

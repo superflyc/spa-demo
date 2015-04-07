@@ -43,13 +43,13 @@
                 "questions": [
                     {"questionType": "radio",
                         "questionText": "Your pain at its WORST?",
-                    "questionValue":""},
+                    "questionValue":"4"},
                     {"questionType": "radio",
                         "questionText": "Your fatigue (tiredness) at its WORST?",
-                        "questionValue":"" },
+                        "questionValue":"8" },
                     {"questionType": "radio",
                         "questionText": "Your nausea at its WORST?",
-                        "questionValue":"" },
+                        "questionValue":"10" },
                     {"questionType": "radio",
                         "questionText": "Your disturbed sleep at its WORST?",
                         "questionValue":"" },
@@ -129,7 +129,7 @@
                         "questionValue":"" },
                     {"questionType": "radio",
                         "questionText": "Enjoyment of life?",
-                        "questionValue":"" }
+                        "questionValue":"10" }
 
                 ]
 

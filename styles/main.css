@@ -11,15 +11,3 @@
     width: 168px;
     min-width: 168px;
 }
-
-form section .question:nth-child(odd) {
-    background-color: #fff;
-    padding: 5px;
-    border: 1px solid #ccc;
-}
-
-form section .question:nth-child(even) {
-    background-color: #ffc0cb;
-    padding: 5px;
-    border: 1px solid #ccc;
-}
