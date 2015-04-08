@@ -57,11 +57,9 @@ var ui = (function () {
 
         var smileyIndex = normalizeRange(elValue, minRange, maxRange, 0, (smileyArray.length -2)); //-2 b/c normalizeRange is inclusive
 
-        var activeElement = $("#"+elId+" > div").filter(function() {
-            return $(this).css('opacity') === "1";
+        $("#"+elId+" > div").each(function() {
+            $(this).css('opacity',0);
         });
-
-        if(activeElement.length) activeElement.css('opacity', 0);
 
         $("."+smileyArray[smileyIndex], $("#"+elId)).css('opacity',1);
 
