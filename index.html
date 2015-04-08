@@ -135,6 +135,8 @@
 
                         <h2 data-bind="text: sectionTitle"></h2>
 
+                        <p><em><!-- ko text: rangeText --><!-- /ko --></em></p>
+
                         <p data-bind="text: sectionText"></p>
                         <!-- ko foreach: questions -->
                         <div class="question">
@@ -143,12 +145,24 @@
                                     <div class="row">
                                         <div class="col-md-6">
 
-                                            <label data-bind="text: questionText, attr: {for: 'question'+$index()}"></label>
+                                            <label data-bind="text: questionText, attr: {for: 'question-'+$parentContext.$index()+'-'+$index()}"></label>
                                         </div>
                                         <!-- ko if: questionType === 'radio' -->
                                         <div class="col-md-6">
-                                            <input data-bind="slider: questionValue, attr: {id:'question'+$index()}, value: questionValue"
+                                            <div data-bind="attr:{id:'smiley-'+$parentContext.$index()+'-'+$index()}" class = "smiley">
+                                                <div class = "smiley-really-really-bad"></div>
+                                                <div class = "smiley-really-bad"></div>
+                                                <div class = "smiley-bad"></div>
+                                                <div class = "smiley-meh"></div>
+                                                <div class = "smiley-ok"></div>
+                                                <div class = "smiley-good"></div>
+                                                <div class = "smiley-really-good"></div>
+                                                <div class = "smiley-really-really-good"></div>
+
+                                            </div>
+                                            <input data-bind="slider: questionValue, attr: {id:'question-'+$parentContext.$index()+'-'+$index()}, value: questionValue"
                                                    role="slider" class = "questionSlider"/>
+
                                         </div>
 
 

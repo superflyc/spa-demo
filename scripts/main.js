@@ -16,6 +16,7 @@ var main = (function () {
            init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
 
                var sliderId = "slider-"+bindingContext.$parentContext.$index()+"-"+bindingContext.$index();
+               var smileyId = "smiley-"+bindingContext.$parentContext.$index()+"-"+bindingContext.$index();
                var theSlider = $(element).slider({
                    ticks: [0,1,2,3,4,5,6,7,8,9,10],
                    ticks_labels: ['0','1','2','3','4','5','6','7','8','9','10'],
@@ -24,11 +25,13 @@ var main = (function () {
                });
 
                ui.setSliderColor(sliderId, valueAccessor());
+               ui.changeSmiley(smileyId, valueAccessor());
 
                theSlider.on("change",(function(retObj) {
                    var newVal = retObj.value.newValue;
                    valueAccessor(newVal);
                    ui.setSliderColor(sliderId, newVal);
+                   ui.changeSmiley(smileyId, newVal);
                }
                ));
 

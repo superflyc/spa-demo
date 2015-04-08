@@ -11,3 +11,118 @@
     width: 168px;
     min-width: 168px;
 }
+
+
+/* smiley styles */
+
+.smiley {
+    position: absolute;
+    top: -6px;
+    left: 250px;
+
+}
+/* semantic names here that aren't very creative, but get the point across */
+
+.smiley-really-really-bad {
+    background-image: url("../images/smiley-22.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-really-bad {
+    background-image: url("../images/smiley-21.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-bad {
+    background-image: url("../images/smiley-20.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-meh {
+    background-image: url("../images/smiley-19.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-ok {
+    background-image: url("../images/smiley-52.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-good {
+    background-image: url("../images/smiley-03.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-really-good {
+    background-image: url("../images/smiley-02.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.smiley-really-really-good {
+    background-image: url("../images/smiley-01.png");
+    background-size: contain;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
