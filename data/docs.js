@@ -3,15 +3,15 @@
 
     {
         "section":"",
-        "title":"Welcome to MD Anderson",
+        "title":"Welcome to Umbrella Corporation",
         "contentText":"Here is some welcome text for the home page. For the interactive questionnaire, go to Cancer->Symptom Inventory",
         "docType":"article"
     },
 
     {
         "section":"ABOUT",
-        "title":"About MD Anderson",
-        "contentText":"Here is text about MD Anderson. For the interactive questionnaire, go to Cancer->Symptom Inventory",
+        "title":"About Umbrella Corporation",
+        "contentText":"Here is text about Umbrella Corporation. For the interactive questionnaire, go to Cancer->Symptom Inventory",
         "docType":"article"
     },
 
@@ -32,7 +32,7 @@
     {
         "section":"CANCER",
         "subSection":"Symptom Inventory",
-        "title":"MD Anderson Symptom Inventory - Heart Failure (MDASI - HF)",
+        "title":"Umbrella Corporation Symptom Inventory - Heart Failure (UCSI - HF)",
         "docType":"survey",
         "contentQuestions":[
             {
@@ -136,8 +136,8 @@
     },
     {
         "section":"CONTACT",
-        "title":"Contacting MD Anderson",
-        "contentText":"Here is text about contacting MD Anderson. For the interactive questionnaire, go to Cancer->Symptom Inventory",
+        "title":"Contacting Umbrella Corporation",
+        "contentText":"Here is text about contacting Umbrella Corporation. For the interactive questionnaire, go to Cancer->Symptom Inventory",
         "docType":"article"
     }
 
